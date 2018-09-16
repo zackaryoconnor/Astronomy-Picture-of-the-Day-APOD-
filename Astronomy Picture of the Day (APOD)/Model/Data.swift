@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct APOD {
+struct APOD: Decodable {
     let url: String
-    let explaination: String
+    let explanation: String
     let title: String
 }

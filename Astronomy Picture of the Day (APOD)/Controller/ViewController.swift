@@ -8,18 +8,50 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+private let reuseId = "reuseId"
+
+class ViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+     
+        collectionView?.backgroundColor = .red
+        collectionView?.register(Cell.self, forCellWithReuseIdentifier: reuseId)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
+
+extension ViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseId, for: indexPath) as? Cell {
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
+
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width - 32, height: 500)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
